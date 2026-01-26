@@ -3,3 +3,4 @@ meta_2025_02_13_csv.tar
 merged_parquet
 .venv
 ./__pycache__/
+./analysis/lit_dupes/lit_dupes.csv
