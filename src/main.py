@@ -1,0 +1,114 @@
+import os
+
+import pandas as pd
+from polyfuzz import PolyFuzz
+
+from clustering import cluster_data
+from dataloader import dump_to_parquet
+from preprocessing import process_data
+
+
+def main():
+
+    # Defining dir loactions where intermediate
+    # and final data is going to be saved
+    TAR_PATH = "./meta_2025_02_13_csv.tar"
+    DATA_DIR = "./test/"
+    RESULTS_DIR = "./test_results/"
+
+    THRESHOLD = 0.80  # string similarity threshold
+    BATCH_SIZE = 1000  # number of compressed csvs to process at a time
+
+    os.makedirs(DATA_DIR, exist_ok=True)
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+
+    # Preparing the dump to be loaded storing it in a parquet
+    # parquet_path = dump_to_parquet(
+    #     path=TAR_PATH, data_dir=DATA_DIR, batch_size=BATCH_SIZE
+    # )
+    parquet_path = "../data/parquets/"
+    print(os.path.getsize(parquet_path) / (1024 * 1024))
+
+    # Processing data to extract IDs, clean it and normalize it
+    # processed_parq_path = process_data(input_path=parquet_path, output_dir=DATA_DIR)
+    processed_parq_path = "../data/processed_data.parquet"
+
+    # Applying ML pipeline to cluster the data with HDBSCAN
+    clustered_data = cluster_data(processed_parq_path, output_dir=RESULTS_DIR)
+
+    # Looping over data grouped by label
+    relevant_matches = []
+    for label, df in clustered_data.group_by("label"):
+
+        # Skipping the -1 group (unclustered data)
+        if label in {-1, "-1"}:
+            continue
+
+        # Convert to pandas for easier manipulation
+        df_pandas = df.to_pandas()
+        pubs = df_pandas["literal"].to_list()
+
+        if not pubs:
+            continue
+
+        try:
+
+            # Using polyfuzz to measure string similraity
+            model = PolyFuzz()  # defaults to n-gram based tf-idf
+            model.match(pubs)
+            matches = model.get_matches()  # XXX: Returns a Pandas DataFrame
+
+            # Filtering out matches based on threshold and redundant comparations
+            # Redundant comparations: A - A ; A - B and B - A (symmetric and reflexive comparisons)
+            matches = matches[
+                (matches["Similarity"] >= THRESHOLD) & (matches["From"] < matches["To"])
+            ]
+
+            if not matches.empty:
+                # Create a mapping from literal values to original data
+                literal_to_data = df_pandas.set_index("literal")
+
+                # Merge original columns for "From" records
+                matches = matches.merge(
+                    literal_to_data,
+                    left_on="From",
+                    right_index=True,
+                    how="left",
+                    suffixes=("", "_from"),
+                )
+
+                # Merge original columns for "To" records
+                matches = matches.merge(
+                    literal_to_data,
+                    left_on="To",
+                    right_index=True,
+                    how="left",
+                    suffixes=("_from", "_to"),
+                )
+
+                matches = matches[
+                    ["Similarity", "From", "To", "entry_id_from", "entry_id_to"]
+                ]
+
+                relevant_matches.append(matches)
+
+        except Exception as e:
+            print(
+                f"{e} caused by one of these strings: {"\n".join(pubs)}\n\nLogging them for further examinations in results directory"
+            )
+            # Logging problematic strings
+            with open(
+                os.path.join(RESULTS_DIR, "problematicStrings.txt"),
+                mode="a",
+                encoding="utf-8",
+            ) as f:
+                f.write("\n\n--- Begin Cluster ---\n")
+                f.writelines(pubs)
+                f.write("\n--- End Cluster ---")
+
+    result = pd.concat(relevant_matches, sort=True)
+    result.to_csv(os.path.join(RESULTS_DIR, "duplicates.csv"))
+
+
+if __name__ == "__main__":
+    main()

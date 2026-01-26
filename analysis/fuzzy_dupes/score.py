@@ -1,7 +1,8 @@
 import pandas as pd
-from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score
 
-df = pd.read_csv("./validation/merged.csv")
+input_path = input("Enter an input path: ")
+df = pd.read_csv(input_path)
 bins = [
     (0.75, 0.85),
     (0.85, 0.90),
@@ -14,20 +15,24 @@ for low, high in bins:
     subset = df[(df["Similarity"] >= low) & (df["Similarity"] < high)]
 
     if subset.empty:
-        f1 = None
+        precision, recall, f1 = None, None, None
         count = 0
     else:
         y_true = subset["is_duplicated"]
         y_pred = [1] * len(subset)  # predicted positive within the bin
-        f1 = f1_score(y_true, y_pred, zero_division=0)
+        precision = precision_score(y_true, y_pred)
         count = len(subset)
 
     results.append(
-        {"similarity_range": f"[{low}, {high})", "num_samples": count, "f1_score": f1}
+        {
+            "similarity_range": f"[{low}, {high})",
+            "num_samples": count,
+            "precision": precision,
+        }
     )
 
 # Save results to CSV
 output_df = pd.DataFrame(results)
-output_df.to_csv("f1_by_range.csv", index=False)
+output_df.to_csv("report.csv", index=False)
 
 print(output_df)

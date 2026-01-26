@@ -2,3 +2,4 @@ data
 meta_2025_02_13_csv.tar
 merged_parquet
 .venv
+./__pycache__/
