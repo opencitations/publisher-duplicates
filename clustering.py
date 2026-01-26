@@ -149,8 +149,10 @@ def cluster_data(
 
 if __name__ == "__main__":
 
+    CLUST_METRIC = "eom"
+
     INPUT_DIR = "./data/processed_data.parquet"
-    OUTPUT_DIR = "./data/clusters/"
+    OUTPUT_DIR = f"./data/{CLUST_METRIC}_clusters/"
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     labelled_data = cluster_data(INPUT_DIR)

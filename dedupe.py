@@ -14,7 +14,7 @@ def main():
     # and final data is going to be saved
     TAR_PATH = "./meta_2025_02_13_csv.tar"
     DATA_DIR = "./test/"
-    RESULTS_DIR = "./results/"
+    RESULTS_DIR = "./test_results/"
 
     THRESHOLD = 0.75
     BATCH_SIZE = 1000  # number of compressed csvs to process at a time
@@ -23,15 +23,20 @@ def main():
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
     # Preparing the dump to be loaded storing it in a parquet
-    parquet_path = dump_to_parquet(path=TAR_PATH, batch_size=BATCH_SIZE)
+    # parquet_path = dump_to_parquet(
+    #     path=TAR_PATH, data_dir=DATA_DIR, batch_size=BATCH_SIZE
+    # )
+    parquet_path = "./test/merged_parquet/part-0.parquet"
+    print(os.path.getsize(parquet_path) / (1024*1024))
 
     # Processing data to extract IDs, clean it and normalize it
     processed_parq_path = process_data(input_path=parquet_path, output_dir=DATA_DIR)
+    # processed_parq_path = "./data/processed_data.parquet"
 
     # Applying ML pipeline to cluster the data with HDBSCAN
-    clustered_data = cluster_data(processed_parq_path, output_dir=DATA_DIR)
+    clustered_data = cluster_data(processed_parq_path, output_dir=RESULTS_DIR)
 
-    # Loppingo over data grouped by label
+    # Lopping over data grouped by label
     relevant_matches = []
     for label, df in clustered_data.group_by("label"):
 
@@ -64,11 +69,11 @@ def main():
             )
             # Logging problematic strings
             with open(
-                "./results/problematicStrings.txt", mode="a", encoding="utf-8"
+                os.path.join(RESULTS_DIR, "problematicStrings.txt"), mode="a", encoding="utf-8"
             ) as f:
                 f.write("\n\n--- Begin Cluster ---\n")
                 f.writelines(pubs)
-                f.write("\n--- End Cluster ---\n")
+                f.write("\n--- End Cluster ---")
 
     result = pd.concat(relevant_matches, sort=True)
     result.to_csv(os.path.join(RESULTS_DIR, "duplicates.csv"))

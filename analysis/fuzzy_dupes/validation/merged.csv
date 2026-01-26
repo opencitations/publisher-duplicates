@@ -1,0 +1,49 @@
+,From,Similarity,To,entry_id_from,entry_id_to,is_duplicated
+0,The Korean Society Of Manufacturing Process Engineers,0.823,The Korean Society Of Manufacturing Technology Engineers,br/06370129954,br/0624042652700,0
+1,Journal Of Microbiology And Biotechnology,0.8,World Journal Of Microbiology & Biotechnology,br/06604247307,br/062303845682,0
+2,Charles Darwin Universiity,0.843,Charles Darwin University,br/062203816573,br/061903857654,1
+3,Gfz Data Services,0.829,Uk Data Service,br/062303890030,br/061103897812,0
+4,"Departamento De Antropología, Facultad De Ciencias Sociales",0.847,"Departamento De Sociología, Facultad De Ciencias Sociales",br/062603855674,br/061903882988,0
+5,Universitas Muhammadiyah Jakarta,0.822,Universitas Muhammadiyah Surakarta,br/06420101992,br/061504298588,0
+6,Association For Future Music Education,0.818,The Korea Association Of Future Education,br/0633090237,br/062302004212,0
+7,Paideia,0.801,Revista Nova Paideia,br/062301786288,br/062302016486,0
+8,Universität Kassel,0.816,Universit��t Kassel,br/06804325773,br/062203853065,1
+9,Cihan University Of Erbil,0.83,Cihan University-Erbil,br/061903572046,br/06304241440,1
+10,"Destin, London School Of Economics And Political Science",0.816,The London School Of Economics And Political Science,br/062303821101,br/06704265893,1
+11,Association For Project Management,0.838,Serbian Project Management Association,br/061304243044,br/06460136466,0
+12,Royal College Of General Practicioners,0.826,Royal College Of General Practitioners,br/062403838483,br/06470181950,1
+13,Polish Academy Of Sciences. Institute Of Paleobiology,0.822,"Polska Akademia Nauk Instytut Paleobiologii (Institute Of Paleobiology, Polish Academy Of Sciences)",br/062603894113,br/06704748315,1
+14,International Journal Of Research In Library Science,0.836,International Journal Of Science And Research,br/06204296848,br/06510171175,0
+15,Faculdade De Ciencias Da Universidade De Lisboa,0.833,"Faculdade De Letras, Universidade De Lisboa",br/061804246949,br/062403437418,0
+16,Universidad Nacional (Costa Rica),1.0,"Universidad Nacional, Costa Rica",br/06204320880,br/06039318,0
+17,Al Albayt University,1.0,Al al-Bayt University,br/06704398433,br/06330584240,1
+18,Universitas Aisyiyah (Unisa) Yogyakarta,0.911,Universitas Aisyiyah Yogyakarta,br/06704307484,br/061803849778,1
+19,The Japan Society Of Industrial Machinery Manufacturers,0.966,The Society Of Industrial Machinery Manufacturers,br/0603982784,br/06350313052,1
+20,Institut National D’Histoire De L’Art,1.0,Institut National d'Histoire De l'Art,br/06604306285,br/06404252698,1
+21,Universidad Simon Bolivar,1.0,Universidad Simón Bolívar,br/06330407586,br/062503834420,1
+22,Escola Superior De Enfermagem De Coimbra,0.916,Escola Superior De Enfermagem De Coimbra (ESEnfC),br/06204260391,br/06804305904,1
+23,Red Iberoamericana De Medio Ambiente,0.908,"Red Iberoamericana De Medio Ambiente (Reima, A.C)",br/061803807621,br/06204384483,1
+24,OMICs Publ. Group,0.912,Omics Group,br/06903905701,br/062503889127,0
+25,Discrete Mathematics & Theoretical Computer Science,1.0,Discrete Mathematics Theoretical Computer Science,br/062203827500,br/06604281938,1
+26,Whiting & Birch,0.985,Whiting And Birch,br/062303862070,br/06204254578,1
+27,Alaska Division Of Geological & Geophysical Surveys,0.989,Alaska Division Of Geological And Geophysical Surveys,br/062403844103,br/062203550646,1
+28,Sax Institute,0.965,The Sax Institute,br/06604289944,br/062203793320,0
+29,American Ornithologists' Union,0.982,The American Ornithologists' Union,br/06430134794,br/06604322036,1
+30,"Information And Publicity Dept., South Manchuria Railway Co.",0.91,"Information And Publicity Dept., South Manchuria Railway Company",br/06290250152,br/06330228717,1
+31,Forschungszentrum Jülich,0.933,Forschungszentrum Jülich GmbH,br/06304294050,br/06704293805,1
+32,Universidad Miguel Hernandez De Elche,0.857,Universidad Miguel Hernández,br/06604223265,br/061803882650,1
+33,Universitas Pgri Semarang,0.861,Universitas Semarang,br/061104245831,br/06904456261,0
+34,AmeriFlux Usda Forest Service,0.872,Usda Forest Service,br/060241729,br/06330585299,0
+35,Arizona Board Of Regents,0.865,"Arizona Board Of Regents, University Of Arizona",br/06204258471,br/06903869789,0
+36,Oxford University PressOxford,0.883,University Of Oxford,br/06604311109,br/0603941224,0
+37,Bcs Learning & Development,0.871,Bcs Learning And Development Limited,br/062103797711,br/06104223343,1
+38,Acta Graphica,0.893,Acta Graphica D.O.O.,br/062203903047,br/062203835246,1
+39,Fundacao Sociedade Brasileira De Pediatria,0.865,Sociedade Brasileira De Pediatria,br/061703659998,br/062503897016,0
+40,Japan Society Of Plasma Science And Fusion Research,0.879,Japan Society Of Plasma Science And Nuclear Fusion Research,br/061103888831,br/06104371975, 1
+41,Korea Development Institute,0.853,Korean Womens Development Institute,br/06601645949,br/06304750967,0
+42,American Society Of Agronomy,0.874,"American Society Of Agronomy, Crop Science Society Of America",br/061604150922,br/062303875182,1
+43,A And V Publications,0.894,Ax Publications,br/06204248466,br/06104394757,0
+44,Fukumoto,0.883,Fukumoto Shoin,br/06470301656,br/06420341115,1
+45,Lawrence Berkeley National Laboratory,0.897,"Lawrence Berkeley National Laboratory (Lbnl), Berkeley",br/06903857318,br/062103829186,1
+46,"Ahi Evran Medical Journal, Kirsehir Ahi Evran University",0.893,Kirsehir Ahi Evran University,br/06103893774,br/06603974807,0
+47,Foundation For Science And Technology,0.883,Indian Science And Technology Foundation,br/061804248468,br/062102079597,0

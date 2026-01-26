@@ -7,7 +7,6 @@ from datetime import datetime
 from pathlib import Path
 
 import polars as pl
-from _typeshed import StrOrBytesPath, StrPath
 
 
 def normalize(s: str):
@@ -97,16 +96,15 @@ def process_data(input_path, output_dir: str | Path = "./data"):
     # column of the loaded file ('publisher'), which
     # aggregates all data in a specific format
     raw = (
-        pl.scan_parquet(input_path)
+        pl.scan_parquet(input_path, low_memory=True)
+        .unique(
+            subset="publisher"
+        )  # eliminating all duplicate aggregated entries in advance
         .with_columns([pl.lit("").alias("pub_omid"), pl.lit("").alias("pub_cr")])
         .with_row_index(
             "row_id"
         )  # adding a row index to help in processing (see process_row)
-        .unique(
-            subset="publisher"
-        )  # eliminating all duplicate aggregated entries in advance
-        .collect()
-    )
+    ).collect()
     print(len(raw))
 
     print(raw.head())
