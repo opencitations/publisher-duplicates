@@ -23,7 +23,7 @@ Before deduplication, it is important to understand the extent and nature of dup
 
 ### Clustering and Fuzzy Matching
 
-The core deduplication logic is implemented in `clustering.py` and orchestrated by `main.py`. Publisher names are first embedded using a sentence transformer model (`all-MiniLM-L6-v2`), which captures semantic similarity between names. If a compatible GPU is available, the code leverages GPU-accelerated libraries for faster computation. The embeddings are then reduced in dimensionality using [UMAP]()https://umap-learn.readthedocs.io/en/latest/how_umap_works.html, and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html) is applied to cluster similar publisher names. Each cluster is assigned a label, with `-1` indicating unclustered data. Clusters are paramount in ensuring a scalable 
+The core deduplication logic is implemented in `clustering.py` and orchestrated by `main.py`. Publisher names are first embedded using a sentence transformer model (`all-MiniLM-L6-v2`), which captures semantic similarity between names. If a compatible GPU is available, the code leverages GPU-accelerated libraries for faster computation. The embeddings are then reduced in dimensionality using [UMAP](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html), and [HDBSCAN](https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html) is applied to cluster similar publisher names. Each cluster is assigned a label, with `-1` indicating unclustered data. Clusters are paramount in ensuring a scalable 
 
 Within each cluster, the tool applies PolyFuzz, a fuzzy string matching library based on **TF-IDF** n-grams, to compute pairwise similarity scores between publisher names. Pairs exceeding a configurable similarity threshold are considered potential duplicates. The results are saved for further validation.
 
@@ -72,3 +72,4 @@ In this range of similarity, most differences between strings come from abbrevia
 
 Based on the experiments, a consistent part of the false duplicates stem faulty publisher names within the OCM data.
 Other limitations were given by the problem afflicting repeated publisher IDs within the dump data, as described in this [issue](https://github.com/opencitations/oc_meta/issues/43).
+
