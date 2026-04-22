@@ -2,8 +2,11 @@
 
 This project is a pipeline designed to address the challenge of duplicate publisher entries in the OpenCitationsMeta data dumps. Publisher names often appear in multiple forms due to typographical errors, inconsistent metadata, or varying conventions. This tool provides a modular pipeline for cleaning, clustering, and deduplicating publisher names.
 
+
 *Dataset*: OpenCitations dump (13-02-2025). 
+
 *Stack*: Polars, Pandas, transformers, HDBSCAN, UMAP, PolyFuzz.
+
 
 
 ## Project Structure and Components
