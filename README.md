@@ -1,11 +1,18 @@
 # Publisher Deduplication Tool for OpenCitationsMeta
 
 This project is a pipeline designed to address the challenge of duplicate publisher entries in the OpenCitationsMeta data dumps. Publisher names often appear in multiple forms due to typographical errors, inconsistent metadata, or varying conventions. This tool provides a modular pipeline for cleaning, clustering, and deduplicating publisher names.
-Experiments were conducted on the whole OpenCitations dumo, albeit an older version (13-02-2025). 
+
+*Dataset*: OpenCitations dump (13-02-2025). 
+*Stack*: Polars, Pandas, transformers, HDBSCAN, UMAP, PolyFuzz.
+
 
 ## Project Structure and Components
 
-The codebase is organized into several directories, each serving a specific role in the deduplication workflow. The `src/` directory contains the codebase for data loading, preprocessing, clustering, and orchestration. The `analysis/` directory provides scripts for data exploration and validation on the results obtained from the pipeline. Data files, both raw and processed, are stored in the `data/` directory, while results and validation output are saved in `test_results/`.
+The codebase is organized into several directories, each serving a specific role in the deduplication workflow.
+* The `src/` directory contains the codebase for data loading, preprocessing, clustering, and orchestration. 
+* The `analysis/` directory provides scripts for data exploration and validation on the results obtained from the pipeline. 
+* Data files, both raw and processed, are stored in the `data/` directory.
+* Results and validation output are saved in `test_results/`.
 
 ### Data Loading and Preprocessing
 
